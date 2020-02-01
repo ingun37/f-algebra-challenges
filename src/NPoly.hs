@@ -7,17 +7,12 @@ import Data.Bifunctor
 
 type NPoly = [Int] -> Int
 
-nZero :: NPoly
-nZero = const 0
-
-nOne :: NPoly
-nOne x = if all (0==) x then 1 else 0
-
 alg :: RingF NPoly -> NPoly
-alg RZero = nZero
-alg ROne = nOne
+alg RZero = const 0
+alg ROne = \x -> if all (0==) x then 1 else 0
 alg (RAdd f g) = \x -> (f x) + (g x)
 alg (RMul f1 f2) = mulPoly f1 f2
+alg (RNeg f) = negate . f
 
 mulPoly :: NPoly -> NPoly -> NPoly
 mulPoly f1 f2 = f
