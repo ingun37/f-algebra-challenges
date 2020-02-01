@@ -11,7 +11,6 @@ main = do
     print $ cata Lib.alg $ Fix (RAdd (Fix ROne) (Fix ROne))
     let added = cata NPoly.alg $ Fix (RAdd (Fix ROne) (Fix ROne))
     let multiplied = cata NPoly.alg $ Fix (RMul (Fix ROne) (Fix ROne))
-    print $ square $ cata NPoly.alg $ Fix ROne
     print $ square added
     print $ square multiplied
 
